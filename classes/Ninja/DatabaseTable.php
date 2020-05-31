@@ -129,6 +129,8 @@ class DatabaseTable {
         $parameters = [':id' => $id];
 
         $this->query('DELETE FROM `' . $this->table . '` WHERE `' . $this->primaryKey . '` = :id', $parameters);
+        
+        return $result->fetchAll(\PDO::FETCH_CLASS, $this->className, $this->constructorArgs);
     }
 
     public function findAll($orderBy = null, $limit = null, $offset = null) {

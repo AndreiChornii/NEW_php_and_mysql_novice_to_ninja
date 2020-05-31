@@ -3,23 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/var/www/host1.server1/classes/Ninja/EntryPoint.php</file>
-            <file>file:/var/www/host1.server1/public/index.php</file>
-            <file>file:/var/www/host1.server1/classes/Ijdb/Controllers/Login.php</file>
+            <file>file:/var/www/host1.server1/classes/Ijdb/Entity/Category.php</file>
             <file>file:/var/www/host1.server1/classes/Ninja/DatabaseTable.php</file>
-            <file>file:/var/www/host1.server1/classes/Ijdb/Entity/Author.php</file>
             <file>file:/var/www/host1.server1/classes/Ijdb/IjdbRoutes.php</file>
-            <file>file:/var/www/host1.server1/classes/Ninja/Authentication.php</file>
-            <file>file:/var/www/host1.server1/templates/authorlist.html.php</file>
-            <file>file:/var/www/host1.server1/classes/Ijdb/Controllers/Register.php</file>
-            <file>file:/var/www/host1.server1/templates/permissions.html.php</file>
-            <file>file:/var/www/host1.server1/templates/jokes.html.php</file>
-            <file>file:/var/www/host1.server1/templates/layout.html.php</file>
             <file>file:/var/www/host1.server1/classes/Ijdb/Controllers/Joke.php</file>
-            <file>file:/var/www/host1.server1/templates/loginerror.html.php</file>
             <file>file:/var/www/host1.server1/classes/Ijdb/Entity/Joke.php</file>
-            <file>file:/var/www/host1.server1/classes/Ijdb/Controllers/Category.php</file>
-            <file>file:/var/www/host1.server1/templates/editjoke.html.php</file>
         </group>
     </open-files>
 </project-private>
