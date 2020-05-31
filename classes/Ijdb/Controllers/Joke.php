@@ -68,6 +68,7 @@ class Joke {
             return;
         }
         $this->jokesTable->delete($_POST['id']);
+        $this->jokeCategoriesTable->deleteWhere('jokeId' ,$_POST['id']);
         header('location: /joke/list');
     }
 
