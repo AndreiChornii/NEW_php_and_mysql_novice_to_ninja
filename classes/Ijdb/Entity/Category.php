@@ -16,12 +16,11 @@ class Category {
         $this->jokeCategoriesTable = $jokeCategoriesTable;
     }
 
-    public function getJokes() {
-        $jokeCategories = $this->jokeCategoriesTable->find('categoryId', $this->id);
+    public function getJokes($limit = null, $offset = null) {
+        $jokeCategories = $this->jokeCategoriesTable->find('categoryId', $this->id, $limit, $offset);
         $jokes = [];
         foreach ($jokeCategories as $jokeCategory) {
-            $joke = $this->jokesTable->
-                    findById($jokeCategory->jokeId);
+            $joke = $this->jokesTable->findById($jokeCategory->jokeId);
             if ($joke) {
                 $jokes[] = $joke;
             }
@@ -37,6 +36,10 @@ class Category {
             return 0;
         }
         return $aDate->getTimestamp() > $bDate->getTimestamp() ? -1 : 1;
+    }
+    
+    public function getNumJokes() {
+        return $this->jokeCategoriesTable->total('categoryId', $this->id);
     }
 
 }

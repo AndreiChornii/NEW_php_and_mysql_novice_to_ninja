@@ -24,8 +24,15 @@ class DatabaseTable {
         return $query;
     }
 
-    public function total() {
-        $query = $this->query('SELECT COUNT(*) FROM `' . $this->table . '`');
+    public function total($field = null, $value = null) {
+        $sql = 'SELECT COUNT(*) FROM `' . $this->table . '`';
+        $parameters = [];
+        
+        if (!empty($field)) {
+            $sql .= ' WHERE `' . $field . '` = :value';
+            $parameters = ['value' => $value];
+        }
+        $query = $this->query($sql, $parameters);
         $row = $query->fetch();
         return $row[0];
     }
@@ -42,12 +49,18 @@ class DatabaseTable {
         return $query->fetchObject($this->className, $this->constructorArgs);
     }
 
-    public function find($column, $value) {
+    public function find($column, $value, $limit = null, $offset = null) {
         $query = 'SELECT * FROM ' . $this->table . ' WHERE ' .
                 $column . ' = :value';
         $parameters = [
             'value' => $value
         ];
+        if ($limit != null) {
+            $query .= ' LIMIT ' . $limit;
+        }
+        if ($offset != null) {
+            $query .= ' OFFSET ' . $offset;
+        }
         $result = $this->query($query, $parameters);
         return $result->fetchAll(\PDO::FETCH_CLASS, $this->className, $this->constructorArgs);
     }
@@ -118,7 +131,7 @@ class DatabaseTable {
         $this->query('DELETE FROM `' . $this->table . '` WHERE `' . $this->primaryKey . '` = :id', $parameters);
     }
 
-    public function findAll($orderBy = null, $limit = null) {
+    public function findAll($orderBy = null, $limit = null, $offset = null) {
         
         $query = 'SELECT * FROM ' . $this->table;
         if ($orderBy != null) {
@@ -126,6 +139,9 @@ class DatabaseTable {
         }
         if ($limit != null) {
             $query .= ' LIMIT ' . $limit;
+        }
+        if ($offset != null) {
+            $query .= ' OFFSET ' . $offset;
         }
         $result = $this->query($query);
 

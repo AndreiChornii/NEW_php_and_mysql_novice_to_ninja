@@ -21,30 +21,24 @@ class Joke {
         $this->authentication = $authentication;
         }
 
-        public function list() {
-//        if (isset($_GET['category'])) {
-//            $jokeCategories = $this->jokeCategoriesTable->find('categoryId', $_GET['category']);
-//            $jokes = [];
-//            foreach ($jokeCategories as $jokeCategory) {
-//                $jokes[] = $this->jokesTable->findById($jokeCategory->jokeId);
-//            }
-//        } else {
-//            $jokes = $this->jokesTable->findAll();
-//        }
+    public function list() {
+            
+        $page = $_GET['page'] ?? 1;
+        $offset = ($page-1)*10;
 
         if (isset($_GET['category'])) {
             $category = $this->categoriesTable->findById($_GET['category']);
-            $jokes = $category->getJokes();
+            $jokes = $category->getJokes(10, $offset);
+            $totalJokes = $category->getNumJokes();
         } else {
-            $jokes = $this->jokesTable->findAll('jokedate DESC', 10);
+            $jokes = $this->jokesTable->findAll('jokedate DESC', 10, $offset);
+            $totalJokes = $this->jokesTable->total();
         }
 
 //        $category = $this->categoriesTable->findById($_GET['category']);
 //        $jokes = $category->getJokes();
 
         $title = 'Joke list';
-
-        $totalJokes = $this->jokesTable->total();
 
         $author = $this->authentication->getUser();
 
@@ -54,7 +48,9 @@ class Joke {
                 'totalJokes' => $totalJokes,
                 'jokes' => $jokes,
                 'user' => $author,
-                'categories' => $this->categoriesTable->findAll()
+                'categories' => $this->categoriesTable->findAll(),
+                'currentPage' => $page,
+                'categoryId' => $_GET['category'] ?? null
             ]
         ];
     }
@@ -77,20 +73,6 @@ class Joke {
 
     public function saveEdit() {
         $author = $this->authentication->getUser();
-
-//        $authorObject = new \Ijdb\Entity\Author($this->jokesTable);
-//        
-//        $authorObject->id = $author['id'];
-//        $authorObject->name = $author['name'];
-//        $authorObject->email = $author['email'];
-//        $authorObject->password = $author['password'];
-//        if (isset($_GET['id'])) {
-//            $joke = $this->jokesTable->findById($_GET['id']);
-//
-//            if ($joke['authorid'] != $author['id']) {
-//                return;
-//            }
-//        }
 
         $joke = $_POST['joke'];
         $joke['jokedate'] = new \DateTime();

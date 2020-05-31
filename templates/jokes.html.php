@@ -1,6 +1,6 @@
 <div class="jokelist">
     <ul class="categories">
-        <?php foreach ($categories as $category): ?>
+        <?php echo $category; foreach ($categories as $category): ?>
             <li><a href="/joke/list?category=<?= $category->id ?>"><?= $category->name ?></a><li>
             <?php endforeach; ?>
     </ul>
@@ -43,12 +43,15 @@
         <?php endforeach; ?>
         Select page:
         <?php
-// Calculate the number of pages
         $numPages = ceil($totalJokes / 10);
-// Display a link for each page
         for ($i = 1; $i <= $numPages; $i++):
-        ?>
-            <a href="/joke/list?page=<?= $i ?>"><?= $i ?></a>
-    <?php endfor; ?>
+            if ($i == $currentPage):
+                ?>
+                <a class="currentpage" href="/joke/list?page=<?= $i ?><?= !empty($categoryId) ? '&category=' . $categoryId : ''?>">
+                <?= $i ?></a>
+            <?php else: ?>
+                <a href="/joke/list?page=<?= $i ?><?= !empty($categoryId) ? '&category=' . $categoryId : ''?>">
+                <?= $i ?></a>
+    <?php endif; ?>
+<?php endfor; ?>
     </div>
-</div>
