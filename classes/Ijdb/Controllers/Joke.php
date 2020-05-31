@@ -67,8 +67,8 @@ class Joke {
         if ($joke->authorid != $author->id && !$author->hasPermission(\Ijdb\Entity\Author::DELETE_JOKES)) {
             return;
         }
-        $this->jokesTable->delete($_POST['id']);
         $this->jokeCategoriesTable->deleteWhere('jokeId' ,$_POST['id']);
+        $this->jokesTable->delete($_POST['id']);
         header('location: /joke/list');
     }
 
