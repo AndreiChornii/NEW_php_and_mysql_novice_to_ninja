@@ -16,6 +16,7 @@ if (!empty($errors)) :
 endif;
 ?>
 <form action="" method="post">
+    <input type="hidden" name="author[id]" value="">
     <label for="email">Your email address</label>
     <input name="author[email]" id="email" type="text" value="<?=$author['email'] ?? ''?>">
     
@@ -24,6 +25,6 @@ endif;
 
     <label for="password">Password</label>
     <input name="author[password]" id="password" type="password" value="<?=$author['password'] ?? ''?>">
- 
+    <input type="hidden" name="author[permissions]" value="0">
     <input type="submit" name="submit" value="Register account">
 </form>
