@@ -69,7 +69,7 @@ class Register {
             $author['password'] = password_hash($author['password'], PASSWORD_DEFAULT);
             $this->authorsTable->save($author);
 //            var_dump($author) ;
-//            header('Location: /author/success');
+            header('Location: /author/success');
         } else {
             // If the data is not valid, show the form again
             return ['template' => 'register.html.php',
