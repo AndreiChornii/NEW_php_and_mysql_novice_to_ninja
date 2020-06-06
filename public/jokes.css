@@ -1,5 +1,5 @@
 * {margin: 0; padding: 0; }
-body {font-family: Arial, Helvetica, Sans-serif; }
+body {font-family: Arial, Helvetica, Sans-serif; min-width: max-content;}
 header {display: block;  background-color: #3cbc8d; padding: 20px; border-bottom: 5px solid #757575;}
 h1 {font-weight: normal; padding: 1.5em; color: white; text-shadow: 1px 1px 0px #444; width: 1000px; margin: auto;}
 
