@@ -8,7 +8,7 @@
     <body>
         <nav>
             <header>
-                <h1>Internet Jokes</h1>
+                <h1>Internet_Jokes</h1>
             </header>
             <ul>
                 <li><a href="/">Home</a></li>
