@@ -1,8 +1,10 @@
 <div class="jokelist">
     <ul class="categories">
-        <?php echo $category; foreach ($categories as $category): ?>
-            <li><a href="/joke/list?category=<?= $category->id ?>"><?= $category->name ?></a><li>
-            <?php endforeach; ?>
+        <?php foreach ($categories as $category): ?>
+            <?php if(isset($_GET['category']) and ($_GET['category'] === $category->id)): ?> <li><b><a href="/joke/list?category=<?= $category->id ?>"><?= $category->name ?></a></b><li>
+            <?php else: ?> <li><a href="/joke/list?category=<?= $category->id ?>"><?= $category->name ?></a><li>
+            <?php endif; ?>
+        <?php endforeach; ?>
     </ul>
 
     <div class="jokes">
