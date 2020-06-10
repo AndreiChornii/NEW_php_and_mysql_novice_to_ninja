@@ -11,8 +11,8 @@
         <?php foreach ($jokes as $joke): ?>
             <blockquote>
                 <!-- Remove the opening tag <p> -->
-                <span><?= $joke->rate ?> </span>
-                <a href="/rate?id=<?= $joke->id ?>"><img src="https://img.icons8.com/material-rounded/24/000000/facebook-like.png"/></a>
+                <span><?= $joke->rate ?></span>
+                <a href="/rate?id=<?= $joke->id ?><?php if(isset($_GET['category'])) echo '&category=' . $_GET['category'] ?>"><img src="https://img.icons8.com/material-rounded/24/000000/facebook-like.png"/></a>
                 <!-- <?= $joke->joketext ?>-->
                 <?= (new \Ninja\Markdown($joke->joketext))->toHtml() ?> 
 

@@ -133,7 +133,12 @@ class Joke {
 //        var_dump((array)$joke);
 //        $this->jokesTable->save((array)$joke);
 
-        header('location: /joke/list');
+        if (!isset($_GET['category'])) {
+            header('location: /joke/list');
+        }
+        else{
+            header('location: /joke/list?category=' . $_GET['category']);
+        }
     }
 
 }
