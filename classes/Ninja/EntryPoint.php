@@ -42,26 +42,27 @@ class EntryPoint {
         $authentication = $this->routes->getAuthentication();
 
         if (isset($routes[$this->route]['login']) && !$authentication->isLoggedIn()) {
-                header('location: /login/error'); }
-        else if (isset($routes[$this->route]['rate']) && !$authentication->isLoggedIn()) {
-                header('location: /rate/error');
-        }
-        else if (isset($routes[$this->route]['permissions']) && !$this->routes->checkPermission($routes[$this->route]['permissions'])) {
-                header('location: /permissions/error');
+            header('location: /login/error');
+        } else if (isset($routes[$this->route]['rate']) && !$authentication->isLoggedIn()) {
+            header('location: /rate/error');
+        } else if (isset($routes[$this->route]['permissions']) && !$this->routes->checkPermission($routes[$this->route]['permissions'])) {
+            header('location: /permissions/error');
         } else {
             $controller = $routes[$this->route][$this->method]['controller'];
             $action = $routes[$this->route][$this->method]['action'];
 
             if (isset($controller)) {
                 $page = $controller->$action();
-            }
+                $title = $page['title'];
 
-            $title = $page['title'];
-
-            if (isset($page['variables'])) {
-                $output = $this->loadTemplate($page['template'], $page['variables']);
+                if (isset($page['variables'])) {
+                    $output = $this->loadTemplate($page['template'], $page['variables']);
+                } else {
+                    $output = $this->loadTemplate($page['template']);
+                }
             } else {
-                $output = $this->loadTemplate($page['template']);
+                $output = $this->loadTemplate('404.html.php');
+                $title = 'Page not found.';
             }
 
             echo $this->loadTemplate('layout.html.php', [
