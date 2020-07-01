@@ -80,7 +80,7 @@ class Register {
                 ]
             ];
         }
-        }
+    }
 
         public function list() {
         $authors = $this->authorsTable->findAll();
